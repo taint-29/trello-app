@@ -1,4 +1,4 @@
-import List from "./component/input/List";
+import List from "./component/list/List";
 
 function App() {
   return (
