@@ -10,4 +10,8 @@ Lesson 4:
 Lesson 5, 6:
 - [x] initialize data
 
-Lesson 7: Using list and map render data
+Lesson 7: Using list and map render data.
+Lesson 9: using context.
+- [x] add card to list
+- [x] add new list
+- [x] update list title
