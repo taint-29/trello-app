@@ -1,15 +1,15 @@
 const cards = [
     {
       id: 'card-1',
-      content: 'Learning ReactJS',
+      title: 'Learning ReactJS',
     },
     {
       id: 'card-2',
-      content: 'Learning ES6',
+      title: 'Learning ES6',
     },
     {
       id: 'card-3',
-      content: 'Play some Game',
+      title: 'Play some Game',
     },
   ];
   
