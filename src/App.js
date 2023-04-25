@@ -11,16 +11,13 @@ function App() {
 
   return (
     <div className="App">
-       {/* {
+       {
         data.listIds.map((listId) => {
           const list = data.lists[listId];
           console.log(list);
           return <List list={list} key={listId} />;
         })
-      } */}
-
-      <List list={data.lists[listId]} key={listId} />
-
+      }
     </div>
   );
 }

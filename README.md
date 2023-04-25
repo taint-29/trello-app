@@ -9,3 +9,5 @@ Lesson 4:
 
 Lesson 5, 6:
 - [x] initialize data
+
+Lesson 7: Using list and map render data
