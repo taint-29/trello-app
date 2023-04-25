@@ -7,3 +7,5 @@ Lesson 4:
 - [x] card component
 - [x] input component
 
+Lesson 5, 6:
+- [x] initialize data

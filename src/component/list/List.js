@@ -13,16 +13,19 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function List() {
+export default function List({ list }) {
   const classes = useStyle();
+
   return (
     <div>
       <Paper className={classes.root}>
         <CssBaseline />
-        <Title />
-        <Card />
-        <Card />
-        <Card />
+        <Title title={list.title} />
+        {/* {list.cards.map((card) => (
+          <Card key={card.id} card={card} />
+        ))} */}
+        <Card key={list.cards[0].id} card={list.cards[0]}/>
+        <Card key={list.cards[1].id} card={list.cards[1]}/>
         <InputContainer/>
       </Paper>
     </div>
