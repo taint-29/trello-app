@@ -26,6 +26,7 @@ export default function List({ list }) {
         ))} */}
         <Card key={list.cards[0].id} card={list.cards[0]}/>
         <Card key={list.cards[1].id} card={list.cards[1]}/>
+        <Card key={list.cards[2].id} card={list.cards[2]}/>
         <InputContainer/>
       </Paper>
     </div>

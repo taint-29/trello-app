@@ -6,15 +6,21 @@ function App() {
 
   const [data, setData] = useState(store);
 
+  const listId = "list-1";
+  console.log(data.lists[listId]);
+
   return (
     <div className="App">
-        {/* <List/> */}
-        {
-          data.listIds.map((listId) => {
+       {/* {
+        data.listIds.map((listId) => {
           const list = data.lists[listId];
+          console.log(list);
           return <List list={list} key={listId} />;
         })
-      }
+      } */}
+
+      <List list={data.lists[listId]} key={listId} />
+
     </div>
   );
 }
