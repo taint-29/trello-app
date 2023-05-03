@@ -25,6 +25,7 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
+// thông tin của mỗi task.
 export default function Title( {title, listId}) {
   const [open, setOpen] = useState(false);
   const [newTitle, setNewTitle] = useState(title);

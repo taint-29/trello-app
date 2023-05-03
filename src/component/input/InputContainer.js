@@ -17,7 +17,7 @@ const useStyle = makeStyles((theme) => ({
     },
   },
 }));
-
+// tạo ô input nhập vào thông tin các task
 export default function InputContainer({ listId, type  }) {
   const classes = useStyle();
   const [open, setOpen] = useState(false);

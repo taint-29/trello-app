@@ -3,6 +3,7 @@ import Login from "./component/Login";
 import App from "./App";
 import { NotFoundPage } from "./component/NotFoundPage";
 
+// componetn điều hướng login 
 function Direction() {
 
 	return (

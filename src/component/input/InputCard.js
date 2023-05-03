@@ -4,6 +4,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import storeApi from '../../utils/storeApi';
 
+// tạo stype cho component
 const useStyle = makeStyles((theme) => ({
   card: {
     width: '280px',
@@ -25,6 +26,7 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
+// tạo một card mới 
 export default function InputCard({ setOpen, listId , type}) {
   const classes = useStyle();
   const { addMoreCard, addMoreList } = useContext(storeApi);

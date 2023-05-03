@@ -23,12 +23,14 @@ const useStyle = makeStyles((theme) => ({
 
 function App() {
 
-  const [data, setData] = useState(store);
-  const [open, setOpen] = useState(false);
-  const [backgroundUrl, setBackgroundUrl] = useState('');
+  
+  const [data, setData] = useState(store);  // lưu thông tin các task
+  const [open, setOpen] = useState(false);  // lưu trạng thái của side menu thay đổi background
+  const [backgroundUrl, setBackgroundUrl] = useState(''); // lưu thông tin đường dẫn image
   
   const classes = useStyle();
 
+  // bên dưới là các thao tác với card
   const addMoreCard = (title, listId) => {
     const newCardId = uuid();
     const newCard = {
@@ -81,6 +83,7 @@ function App() {
     setData(newState);
   };
 
+  // thực hiện di chuyển card
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
     console.log('destination', destination, 'source', source, draggableId);
@@ -129,6 +132,7 @@ function App() {
     }
   };
 
+  // dùng useconext truyền các thông tin về card xuống. dùng thư viện react-beautiful-dnd drag drop các task.
   return (
     <StoreApi.Provider value={{ addMoreCard, addMoreList, updateListTitle }}>
       <div
@@ -163,7 +167,6 @@ function App() {
           setBackgroundUrl={setBackgroundUrl}
           open={open}
           setOpen={setOpen}
-          key={backgroundUrl}
         />
       </div>
     </StoreApi.Provider>

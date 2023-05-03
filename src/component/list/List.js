@@ -17,6 +17,7 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
+// quản lý danh sách cách task
 export default function List({ list, index }) {
   const classes = useStyle();
   return (
