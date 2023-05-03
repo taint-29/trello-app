@@ -7,22 +7,18 @@ import InputContainer from './component/input/InputContainer';
 import { makeStyles } from '@material-ui/core/styles';
 import TopBar from "./component/TopBar";
 import SideMenu from "./component/SideMenu";
+import {DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 const useStyle = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    // minHeight: '100vh',
-    // // background: 'lightblue',
-    // backgroundImage: `url(https://images.unsplash.com/photo-1433838552652-f9a46b332c40?crop=entropy&cs=srgb&fm=jpg&ixid=Mnw0NDAxODh8MHwxfHNlYXJjaHwxMXx8TGFuZHNjYXBlfGVufDB8fHx8MTY4Mjg3MzA3Nw&ixlib=rb-4.0.3&q=85)`,
-    // width: '100%',
     minHeight: '100vh',
     background: 'lightblue',
     width: '100%',
     overflowY: 'auto',
   },
-  // listContainer: {
-  //   display: 'flex',
-  // },
+  listContainer: {
+    display: 'flex',
+  },
 }));
 
 function App() {
@@ -85,32 +81,92 @@ function App() {
     setData(newState);
   };
 
+  const onDragEnd = (result) => {
+    const { destination, source, draggableId, type } = result;
+    console.log('destination', destination, 'source', source, draggableId);
+
+    if (!destination) {
+      return;
+    }
+
+    if (type === 'list') {
+      const newListIds = data.listIds;
+      newListIds.splice(source.index, 1);
+      newListIds.splice(destination.index, 0, draggableId);
+      return;
+    }
+
+    const sourceList = data.lists[source.droppableId];
+    const destinationList = data.lists[destination.droppableId];
+    const draggingCard = sourceList.cards.filter(
+      (card) => card.id === draggableId
+    )[0];
+
+    if (source.droppableId === destination.droppableId) {
+      sourceList.cards.splice(source.index, 1);
+      destinationList.cards.splice(destination.index, 0, draggingCard);
+      const newSate = {
+        ...data,
+        lists: {
+          ...data.lists,
+          [sourceList.id]: destinationList,
+        },
+      };
+      setData(newSate);
+    }else {
+      sourceList.cards.splice(source.index, 1);
+      destinationList.cards.splice(destination.index, 0, draggingCard);
+
+      const newState = {
+        ...data,
+        lists: {
+          ...data.lists,
+          [sourceList.id]: sourceList,
+          [destinationList.id]: destinationList,
+        },
+      };
+      setData(newState);
+    }
+  };
+
   return (
-    <StoreApi.Provider value={{ addMoreCard, addMoreList, updateListTitle  }}>
-    <div  className={classes.root} 
-     style={{
+    <StoreApi.Provider value={{ addMoreCard, addMoreList, updateListTitle }}>
+      <div
+        className={classes.root}
+        style={{
           backgroundImage: `url(${backgroundUrl})`,
           backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat'
+          backgroundRepeat: 'no-repeat',
         }}
-        >
-    {data.listIds.map((listId) => {
-      const list = data.lists[listId];
-      return <List list={list} key={listId} />;
-    })}
-    
-    <InputContainer type="list" /> 
-    <TopBar setOpen={setOpen} />
-    <SideMenu
-      setBackgroundUrl={setBackgroundUrl}
-      open={open}
-      setOpen={setOpen}
-    />
-    </div>
-    
+      >
+        <TopBar setOpen={setOpen} />
 
-
-  </StoreApi.Provider>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="app" type="list" direction="horizontal">
+            {(provided) => (
+              <div
+                className={classes.listContainer}
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {data.listIds.map((listId, index) => {
+                  const list = data.lists[listId];
+                  return <List list={list} key={listId} index={index} />;
+                })}
+                <InputContainer type="list" />
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+        <SideMenu
+          setBackgroundUrl={setBackgroundUrl}
+          open={open}
+          setOpen={setOpen}
+          key={backgroundUrl}
+        />
+      </div>
+    </StoreApi.Provider>
   );
 }
 

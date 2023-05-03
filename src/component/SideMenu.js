@@ -3,7 +3,6 @@ import { Drawer, Typography, Divider, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Clear from '@material-ui/icons/Clear';
 import { getImages } from '../utils/ImageApi';
-// import { getImages } from '../utils/ImageApi';
 
 const useStyle = makeStyles((theme) => ({
   drawerPaper: {
@@ -64,31 +63,10 @@ export default function SideMenu({ setBackgroundUrl, setOpen, open }) {
       <Divider />
 
       <div className={classes.menuContainer}>
-        {/* <div
-          className={classes.menu}
-          style={{
-            backgroundImage: `url(https://images.pexels.com/photos/755726/pexels-photo-755726.jpeg?cs=srgb&dl=astronomy-astrophotography-clouds-colors-755726.jpg&fm=jpg)`,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-          }}
-        >
-          <span>photo</span>
-        </div> */}
-        {/* <div
-          className={classes.menu}
-          style={{
-            backgroundImage: `url(https://images.pexels.com/photos/226589/pexels-photo-226589.jpeg?cs=srgb&dl=closeup-photo-of-multi-color-stick-226589.jpg&fm=jpg)`,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-          }}
-        >
-          <span>color</span>
-        </div> */}
-      </div>
-      <div className={classes.menuContainer}>
-        {photos.map((photo) => (
+        {photos.map((photo, index) => (
           <div
             className={classes.menu}
+            key={index}
             style={{
               backgroundImage: `url(${photo.thumb})`,
               backgroundSize: 'cover',
